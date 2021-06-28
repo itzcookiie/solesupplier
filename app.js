@@ -6,12 +6,10 @@ app.use(express.urlencoded({ extended: false }));
 
 app.post('/', (req,res) => {
     const inStockRetailers = req.body.retailers.filter(retailer => retailer.isInStock);
-    const retailersWithDiscounts = inStockRetailers.filter(retailer => retailer.discountPrice);
-    // No discount means no price drop
-    if(!retailersWithDiscounts.length) {
-        res.send({"alertRequired": false}).status(400);
-    }
-    const lowToHighPrices = retailersWithDiscounts.sort((a,b) => a.retailPrice - b.retailPrice || a.discountPrice - b.discountPrice);
+    const retailPrices = inStockRetailers.map(retailer => retailer.retailPrice);
+    const lowestPrice = Math.min(...retailPrices);
+    const retailersWithLowestPrice = inStockRetailers.filter(retailer => retailer.retailPrice === lowestPrice);
+    const lowToHighPrices = retailersWithLowestPrice.sort((a,b) => a.retailPrice - b.retailPrice || a.discountPrice - b.discountPrice);
     const cheapestRetailer = lowToHighPrices[0];
 
     if(cheapestRetailer.discountPrice && cheapestRetailer.retailPrice - cheapestRetailer.discountPrice >= 10) {
