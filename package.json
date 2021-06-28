@@ -1,0 +1,25 @@
+{
+  "name": "solesupplier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itzcookiie/solesupplier.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itzcookiie/solesupplier/issues"
+  },
+  "homepage": "https://github.com/itzcookiie/solesupplier#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
